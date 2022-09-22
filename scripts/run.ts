@@ -1,3 +1,4 @@
+// @ts-ignore
 const main = async () => {
 	const {ethers} = require("hardhat");
 	const [owner, randomPerson] = await ethers.getSigners();
@@ -38,14 +39,7 @@ const main = async () => {
 	console.log(links);
 }
 
-const runMain = async () => {
-	try {
-		await main();
-		process.exit(0);
-	} catch (error) {
-		console.error(error);
-		process.exit(1);
-	}
-}
-
-runMain();
+main().catch((error) => {
+	console.error(error);
+	process.exitCode = 1;
+});
