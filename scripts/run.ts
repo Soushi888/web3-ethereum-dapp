@@ -5,7 +5,7 @@ const main = async () => {
 	console.log("Contract deployed to:", waveContract.address);
 }
 
-const runMain= async () => {
+const runMain = async () => {
 	try {
 		await main();
 		process.exit(0);
