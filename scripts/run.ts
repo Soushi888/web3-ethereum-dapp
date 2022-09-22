@@ -24,6 +24,12 @@ const main = async () => {
 
 	waveCount = await waveContract.getTotalWaves();
 
+	waveTxn = await waveContract.waveLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+	await waveTxn.wait();
+
+	let waves = await waveContract.getWaves();
+	console.log(waves);
+
 	let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 	await linkTxn.wait();
 
