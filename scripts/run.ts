@@ -8,8 +8,7 @@ const main = async () => {
 	console.log("Contract deployed to:", waveContract.address);
 	console.log("Contract deployed by:", owner.address);
 
-	let waveCount;
-	waveCount = await waveContract.getTotalWaves();
+	await waveContract.getTotalWaves();
 
 	let waveTxn = await waveContract.wave();
 	await waveTxn.wait();
@@ -17,12 +16,12 @@ const main = async () => {
 	waveTxn = await waveContract.connect(randomPerson).wave();
 	await waveTxn.wait();
 
-	waveCount = await waveContract.getTotalWaves();
+	await waveContract.getTotalWaves();
 
 	waveTxn = await waveContract.resetWaves();
 	await waveTxn.wait();
 
-	waveCount = await waveContract.getTotalWaves();
+	await waveContract.getTotalWaves();
 
 	waveTxn = await waveContract.waveLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 	await waveTxn.wait();
