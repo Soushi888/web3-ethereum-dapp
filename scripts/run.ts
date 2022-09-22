@@ -18,6 +18,19 @@ const main = async () => {
 	await waveTxn.wait();
 
 	waveCount = await waveContract.getTotalWaves();
+
+	waveTxn = await waveContract.resetWaves();
+	await waveTxn.wait();
+
+	waveCount = await waveContract.getTotalWaves();
+
+	let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+	await linkTxn.wait();
+
+	linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=lQEZkfGsRx8");
+
+	let links = await waveContract.getLinks();
+	console.log(links);
 }
 
 const runMain = async () => {
