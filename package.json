@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx hardhat run ./scripts/run.ts",
+    "ui": "cd ui && npm start",
     "accounts": "npx hardhat accounts",
     "build": "npx hardhat compile",
     "node": "npx hardhat node",
