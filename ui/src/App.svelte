@@ -2,6 +2,7 @@
   import {onMount} from "svelte";
   import ConnectWalletButton from "./ConnectWalletButton.svelte";
   import WaveButton from "./WaveButton.svelte";
+  import Loader from "./Loader.svelte";
 
 
   const {ethereum} = window;
@@ -31,10 +32,7 @@
 
   $: isLogged ? status = "Connected" : status = "Not connected";
 
-
-  onMount(() => {
-    checkIfWalletIsConnected();
-  });
+  checkIfWalletIsConnected();
 </script>
 
 <main>
@@ -57,6 +55,8 @@
           <WaveButton account={account}/>
         </div>
       {/if}
+
+      <Loader/>
     </div>
   </div>
 </main>
