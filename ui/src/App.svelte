@@ -1,6 +1,8 @@
 <script lang="ts">
   import {onMount} from "svelte";
   import ConnectWalletButton from "./ConnectWalletButton.svelte";
+  import WaveButton from "./WaveButton.svelte";
+
 
   const {ethereum} = window;
   let status: string, isLogged: boolean, account: string;
@@ -22,16 +24,13 @@
     }
   };
 
-  const handleConnected =  (event) => {
+  const handleConnected = (event) => {
     account = event.detail.account;
     isLogged = true;
   };
 
   $: isLogged ? status = "Connected" : status = "Not connected";
 
-  const wave = () => {
-    alert(`${account} just waved!!`);
-  }
 
   onMount(() => {
     checkIfWalletIsConnected();
@@ -55,9 +54,7 @@
 
       {#if (isLogged)}
         <div class="btn">
-          <button class="wave-btn" on:click={wave}>
-            Wave at Me
-          </button>
+          <WaveButton account={account}/>
         </div>
       {/if}
     </div>
@@ -89,14 +86,6 @@
     display: flex;
     justify-content: center;
     margin-top: 16px;
-  }
-
-  .wave-btn {
-    cursor: pointer;
-    margin-top: 16px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
   }
 
   .success {
