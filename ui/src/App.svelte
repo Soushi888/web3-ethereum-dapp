@@ -1,9 +1,8 @@
 <script lang="ts">
   import {onMount} from "svelte";
-  import ConnectWallet from "./ConnectWallet.svelte";
 
   const {ethereum} = window;
-  let status: string, isLogged: boolean, account: Account;
+  let status: string, isLogged: boolean, account: string;
 
   const checkIfWalletIsConnected = async () => {
     if (ethereum) {
