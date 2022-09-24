@@ -24,7 +24,7 @@
   const getWaves = async () => {
     try {
       const waves = await wavePortalContract.getTotalWaves();
-      console.log("Total waves :", waves.toNumber());
+      alert(`Total waves: ${waves}`);
     } catch (error) {
       console.error(error);
     }
