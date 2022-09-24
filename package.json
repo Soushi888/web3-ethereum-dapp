@@ -9,7 +9,9 @@
     "accounts": "npx hardhat accounts",
     "build": "npx hardhat compile",
     "node": "npx hardhat node",
-    "deploy": "npx hardhat run ./scripts/deploy.ts --network localhost",
+    "deploy-localhost": "npx hardhat run ./scripts/deploy.ts --network localhost",
+    "deploy-staging": "npx hardhat run ./scripts/deploy.ts --network goerli",
+    "deploy-prod": "npx hardhat run ./scripts/deploy.ts --network mainnet",
     "test": "npx hardhat test"
   },
   "keywords": [],
@@ -22,5 +24,8 @@
     "chai": "^4.3.6",
     "ethers": "^5.7.1",
     "hardhat": "^2.11.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.2"
   }
 }
