@@ -1,5 +1,6 @@
 <script lang="ts">
   import {onMount} from "svelte";
+  import ConnectWalletButton from "./ConnectWalletButton.svelte";
 
   const {ethereum} = window;
   let status: string, isLogged: boolean, account: string;
@@ -21,16 +22,12 @@
     }
   };
 
-  $: isLogged ? status = "Connected" : status = "Not connected";
-
-  const connectWallet = async () => {
-    const accounts = await ethereum.request({method: "eth_requestAccounts"});
-    account = accounts[0];
-
-    if (account) {
-      isLogged = true;
-    }
+  const handleConnected =  (event) => {
+    account = event.detail.account;
+    isLogged = true;
   };
+
+  $: isLogged ? status = "Connected" : status = "Not connected";
 
   const wave = () => {
     alert(`${account} just waved!!`);
@@ -51,14 +48,14 @@
       </div>
 
       {#if (ethereum && !isLogged)}
-        <div class="connect-btn">
-          <button on:click={connectWallet}>Connect Wallet</button>
+        <div class="btn">
+          <ConnectWalletButton on:connected={handleConnected}/>
         </div>
       {/if}
 
       {#if (isLogged)}
-        <div class="wave-btn">
-          <button on:click={wave}>
+        <div class="btn">
+          <button class="wave-btn" on:click={wave}>
             Wave at Me
           </button>
         </div>
@@ -88,39 +85,18 @@
     font-weight: 600;
   }
 
-  .bio {
-    text-align: center;
-    color: gray;
+  .btn {
+    display: flex;
+    justify-content: center;
     margin-top: 16px;
   }
 
   .wave-btn {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .wave-btn button {
     cursor: pointer;
     margin-top: 16px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-  }
-
-  .connect-btn {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .connect-btn button {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
   }
 
   .success {
