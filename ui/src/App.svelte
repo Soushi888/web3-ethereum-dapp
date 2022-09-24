@@ -5,22 +5,19 @@
   let status: string, isLogged: boolean, account: string;
 
   const checkIfWalletIsConnected = async () => {
-    if (ethereum) {
-      status = "Metamask is installed";
-    } else {
+    if (!ethereum) {
       status = "Metamask is not installed";
       return;
     }
+    status = "Metamask is installed";
 
     const accounts = await ethereum.request({method: 'eth_accounts'});
-    console.log(accounts);
 
     if (accounts.length !== 0) {
       account = accounts[0];
       isLogged = true;
     } else {
       isLogged = false;
-      console.log("Wallet is not connected");
     }
   };
 
@@ -50,20 +47,12 @@
     <div class="dataContainer">
       <div class="header">
         👋 Hey there!
-      </div>
-
-      <div class="status">
         <p class={isLogged ? "success" : "fail"}>{status}</p>
       </div>
 
-      <div class="bio">
-        I am farza and I worked on self-driving cars so that's pretty cool right? Connect your Ethereum wallet and wave
-        at me!
-      </div>
-
-      {#if (ethereum)}
+      {#if (ethereum && !isLogged)}
         <div class="connect-btn">
-          <button id="connect-btn" on:click={connectWallet}>Connect Wallet</button>
+          <button on:click={connectWallet}>Connect Wallet</button>
         </div>
       {/if}
 
