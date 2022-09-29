@@ -1,13 +1,14 @@
 <script lang="ts">
   import {ethers} from "ethers";
   import abi from "./utils/WavePortal.json";
-  // import type {WavePortalContract} from "./global";
+  import versions from "./utils/versions.json";
   import type {WavePortal} from "../../typechain-types/WavePortal";
+
 
   let isLoading = false;
 
   const {ethereum} = window;
-  const contractAddress = "0x36288dC723cCb075d6F743eCD3aAca6368087e42";
+  const contractAddress = versions.v2;
   const contractABI = abi.abi;
 
   const provider = new ethers.providers.Web3Provider(ethereum);
