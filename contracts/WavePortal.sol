@@ -57,13 +57,15 @@ contract WavePortal {
         console.log("Getting link");
         for (uint i = 0; i < links.length; i++) {
             if (keccak256(abi.encodePacked(links[i].link)) == keccak256(abi.encodePacked(_link))) {
-                return links[i];
+                Link memory newLink = links[i];
+                newLink.waveCount = getNumberOfWaveByLink(_link);
+                return newLink;
             }
         }
         return Link("", 0, 0);
     }
 
-    function getNumberOfWaveByLink(string memory _link) view public returns (uint256) {
+    function getNumberOfWaveByLink(string memory _link) view private returns (uint256) {
         uint256 count = 0;
         for (uint256 i = 0; i < waves.length; i++) {
             if (keccak256(abi.encodePacked(waves[i].link.link)) == keccak256(abi.encodePacked(_link))) {
@@ -76,11 +78,19 @@ contract WavePortal {
     function waveLink(string memory _link) public {
         Link memory link = getLink(_link);
         if (link.timestamp != 0) {
-            waves.push(Wave(msg.sender, link, block.timestamp));
             link.waveCount++;
+            waves.push(Wave(msg.sender, link, block.timestamp));
             console.log("%s has waved!", msg.sender);
         } else {
-            console.log("Link not found");
+            console.log("Error : Link not found");
         }
+    }
+
+    function validateYoutubeLink(string memory _link) view public returns (bool) {
+        string memory youtubeUrlRegex = "^(https?:\\/\\/)?(www\\.)?(youtube\\.com|youtu\\.?be)\\/.+$";
+        bool matchRegex = (keccak256(abi.encodePacked(_link)) == keccak256(abi.encodePacked(youtubeUrlRegex)));
+
+        console.log("Match regex : %s", matchRegex);
+        return matchRegex;
     }
 }
