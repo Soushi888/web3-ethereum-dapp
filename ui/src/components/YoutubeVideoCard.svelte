@@ -54,7 +54,7 @@
 
   .waves-count {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
   }
 
