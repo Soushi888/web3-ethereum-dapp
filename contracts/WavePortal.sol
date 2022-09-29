@@ -20,12 +20,17 @@ contract WavePortal {
 
     Wave[] waves;
 
+    event NewWave(Wave wave);
+    event NewLink(Link link);
+
     constructor() {
         console.log("I am a contract and I am smart!");
     }
 
     function wave() public {
-        waves.push(Wave(msg.sender, Link("", block.timestamp, 0), block.timestamp));
+        Wave memory wave = Wave(msg.sender, Link("", block.timestamp, 0), block.timestamp);
+        waves.push(wave);
+        emit NewWave(wave);
         console.log("%s has waved!", msg.sender);
     }
 
@@ -45,7 +50,9 @@ contract WavePortal {
 
     function addLink(string memory _link) public {
         if (bytes(getLink(_link).link).length == 0) {
-            links.push(Link(_link, block.timestamp, 0));
+            Link memory link = Link(_link, block.timestamp, 0);
+            links.push(link);
+            emit NewLink(link);
             console.log("%s has added a link : %s", msg.sender, _link);
         }
     }
@@ -81,8 +88,10 @@ contract WavePortal {
     function waveLink(string memory _link) public {
         Link memory link = getLink(_link);
         if (link.timestamp != 0) {
+            Wave memory wave = Wave(msg.sender, link, block.timestamp);
             link.waveCount++;
-            waves.push(Wave(msg.sender, link, block.timestamp));
+            waves.push(wave);
+            emit NewWave(wave);
             console.log("%s has waved!", msg.sender);
         } else {
             console.log("Error : Link not found");

@@ -18,6 +18,7 @@
       await linkTxn.wait();
       isLoading = false;
       alert("Link added!");
+      location.reload();
     } catch (error) {
       console.error(error);
     }

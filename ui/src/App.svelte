@@ -61,7 +61,9 @@
           <CountWaveButton/>
           <AddLinkButton/>
         </div>
-        <VideosGrid/>
+        <div class="videos">
+          <VideosGrid/>
+        </div>
       {/if}
     </div>
   </div>
@@ -79,7 +81,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 600px;
   }
 
   .header {
@@ -93,6 +94,10 @@
     justify-content: center;
     margin-top: 16px;
     gap: 10px;
+  }
+
+  .videos {
+    margin-top: 16px;
   }
 
   .success {
