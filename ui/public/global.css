@@ -11,3 +11,15 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 	monospace;
 }
+
+.btn {
+	cursor: pointer;
+	margin-top: 16px;
+	padding: 10px 20px;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+
+.btn:disabled {
+	cursor: not-allowed;
+}
