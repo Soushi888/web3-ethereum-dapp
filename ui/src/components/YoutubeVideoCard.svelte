@@ -1,6 +1,6 @@
 <script lang="ts">
   import {onMount} from "svelte";
-  import WavePortalContract from "./lib/WavePortal.contract";
+  import WavePortalContract from "../lib/WavePortal.contract";
 
   export let url;
   let contract;

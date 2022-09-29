@@ -1,8 +1,8 @@
 <script lang="ts">
-  import ConnectWalletButton from "./ConnectWalletButton.svelte";
-  import WaveButtons from "./buttons/WaveButtons.svelte";
-  import VideosGrid from "./VideosGrid.svelte";
-  import CountWaveButtons from "./buttons/CountWaveButtons.svelte";
+  import ConnectWalletButton from "./components/buttons/ConnectWalletButton.svelte";
+  import WaveButtons from "./components/buttons/WaveButtons.svelte";
+  import VideosGrid from "./components/VideosGrid.svelte";
+  import CountWaveButtons from "./components/buttons/CountWaveButtons.svelte";
   import versions from "./utils/versions.json";
 
 

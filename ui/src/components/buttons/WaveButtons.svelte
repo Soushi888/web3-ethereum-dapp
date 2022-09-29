@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WavePortalContract from "../lib/WavePortal.contract";
+  import WavePortalContract from "../../lib/WavePortal.contract";
   import {onMount} from "svelte";
 
   let contract;
