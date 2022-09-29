@@ -94,6 +94,19 @@ describe('WavePortal', () => {
 		expect(links.length).to.equal(1);
 	});
 
+	it('should not add link if already present', async () => {
+		const {waveContract} = await setup();
+
+		let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+		await linkTxn.wait();
+
+		linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+		await linkTxn.wait();
+
+		let links = await waveContract.getLinks();
+		expect(links.length).to.equal(1);
+	});
+
 	it('should get a link', async () => {
 		const {waveContract} = await setup();
 

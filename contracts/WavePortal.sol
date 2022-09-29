@@ -44,8 +44,10 @@ contract WavePortal {
     }
 
     function addLink(string memory _link) public {
-        links.push(Link(_link, block.timestamp, 0));
-        console.log("%s has added a link : %s", msg.sender, _link);
+        if (bytes(getLink(_link).link).length == 0) {
+            links.push(Link(_link, block.timestamp, 0));
+            console.log("%s has added a link : %s", msg.sender, _link);
+        }
     }
 
     function getLinks() view public returns (Link[] memory) {
@@ -55,14 +57,15 @@ contract WavePortal {
 
     function getLink(string memory _link) view public returns (Link memory) {
         console.log("Getting link");
+        Link memory newLink = Link("", 0, 0);
         for (uint i = 0; i < links.length; i++) {
             if (keccak256(abi.encodePacked(links[i].link)) == keccak256(abi.encodePacked(_link))) {
-                Link memory newLink = links[i];
+                newLink = links[i];
                 newLink.waveCount = getNumberOfWaveByLink(_link);
                 return newLink;
             }
         }
-        return Link("", 0, 0);
+        return newLink;
     }
 
     function getNumberOfWaveByLink(string memory _link) view private returns (uint256) {
