@@ -1,6 +1,7 @@
 <script lang="ts">
   import ConnectWalletButton from "./ConnectWalletButton.svelte";
-  import WaveButton from "./WaveButton.svelte";
+  import WaveButtons from "./WaveButtons.svelte";
+  import VideosGrid from "./VideosGrid.svelte";
 
 
   const {ethereum} = window;
@@ -49,9 +50,10 @@
       {/if}
 
       {#if (isLogged)}
-        <div class="btn">
-          <WaveButton />
-        </div>
+          <div class="btn">
+            <WaveButtons/>
+          </div>
+          <VideosGrid/>
       {/if}
     </div>
   </div>
