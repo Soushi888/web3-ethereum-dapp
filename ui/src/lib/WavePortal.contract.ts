@@ -5,11 +5,10 @@ import abi from "../utils/WavePortal.json";
 import versions from "../utils/versions.json";
 import type {WavePortal} from "../../../typechain-types";
 
-
 async function WavePortalContract(): Promise<WavePortal> {
 	// @ts-ignore
 	const {ethereum} = window;
-	const contractAddress = versions.v2;
+	const contractAddress = versions.latest;
 	const contractABI = abi.abi;
 
 	const provider = new ethers.providers.Web3Provider(ethereum);
