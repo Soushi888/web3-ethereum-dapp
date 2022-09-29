@@ -18,6 +18,4 @@
   }
 </script>
 
-<div class="buttons">
-  <button class="btn" on:click={getWaves}>Waves Count</button>
-</div>
+<button class="btn" on:click={getWaves}>Waves Count</button>

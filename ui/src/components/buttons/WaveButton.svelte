@@ -23,10 +23,8 @@
   }
 </script>
 
-<div class="buttons">
-  {#if (isLoading)}
-    <button class="btn" disabled>Waving...</button>
-  {:else}
-    <button class="btn" on:click={wave}>Wave at Me</button>
-  {/if}
-</div>
+{#if (isLoading)}
+  <button class="btn" disabled>Waving...</button>
+{:else}
+  <button class="btn" on:click={wave}>Wave at Me</button>
+{/if}

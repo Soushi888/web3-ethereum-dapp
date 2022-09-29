@@ -1,9 +1,10 @@
 <script lang="ts">
   import ConnectWalletButton from "./components/buttons/ConnectWalletButton.svelte";
-  import WaveButtons from "./components/buttons/WaveButtons.svelte";
+  import WaveButtons from "./components/buttons/WaveButton.svelte";
   import VideosGrid from "./components/VideosGrid.svelte";
-  import CountWaveButtons from "./components/buttons/CountWaveButtons.svelte";
+  import CountWaveButton from "./components/buttons/CountWaveButton.svelte";
   import versions from "./utils/versions.json";
+  import AddLinkButton from "./components/buttons/AddLinkButton.svelte";
 
 
   const {ethereum} = window;
@@ -57,7 +58,8 @@
       {#if (isLogged)}
         <div class="buttons">
           <WaveButtons/>
-          <CountWaveButtons/>
+          <CountWaveButton/>
+          <AddLinkButton/>
         </div>
         <VideosGrid/>
       {/if}
