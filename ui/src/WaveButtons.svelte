@@ -1,23 +1,17 @@
 <script lang="ts">
-  import {ethers} from "ethers";
-  import abi from "./utils/WavePortal.json";
-  import versions from "./utils/versions.json";
-  import type {WavePortal} from "../../typechain-types/WavePortal";
+  import WavePortalContract from "./lib/WavePortal.contract";
+  import {onMount} from "svelte";
 
-
+  let contract;
   let isLoading = false;
 
-  const {ethereum} = window;
-  const contractAddress = versions.v2;
-  const contractABI = abi.abi;
-
-  const provider = new ethers.providers.Web3Provider(ethereum);
-  const signer = provider.getSigner();
-  const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer) as WavePortal;
+  onMount(async () => {
+    contract = await WavePortalContract();
+  });
 
   const wave = async () => {
     try {
-      let waveTxn = await wavePortalContract.wave();
+      let waveTxn = await contract.wave();
       isLoading = true;
       console.log("Mining...", waveTxn.hash);
       await waveTxn.wait();
@@ -30,7 +24,7 @@
 
   const getWaves = async () => {
     try {
-      const waves = await wavePortalContract.getTotalWaves();
+      const waves = await contract.getTotalWaves();
       alert(`Total waves: ${waves}`);
     } catch (error) {
       console.error(error);
