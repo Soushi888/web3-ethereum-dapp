@@ -12,6 +12,12 @@
   const addLink = async () => {
     try {
       let youtubeUrl = prompt("Please enter your YouTube URL");
+      const isAlreadyPresent = (await contract.getLink(youtubeUrl))[0] !== "";
+      if (isAlreadyPresent) {
+        alert("This link is already present");
+        return;
+      }
+
       let linkTxn = await contract.addLink(youtubeUrl);
       isLoading = true;
       console.log("Mining...", linkTxn.hash);
