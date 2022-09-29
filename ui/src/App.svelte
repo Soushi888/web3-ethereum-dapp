@@ -1,8 +1,6 @@
 <script lang="ts">
-  import {onMount} from "svelte";
   import ConnectWalletButton from "./ConnectWalletButton.svelte";
   import WaveButton from "./WaveButton.svelte";
-  import Loader from "./Loader.svelte";
 
 
   const {ethereum} = window;
@@ -52,11 +50,9 @@
 
       {#if (isLogged)}
         <div class="btn">
-          <WaveButton account={account}/>
+          <WaveButton />
         </div>
       {/if}
-
-      <Loader/>
     </div>
   </div>
 </main>
