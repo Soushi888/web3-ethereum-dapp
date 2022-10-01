@@ -73,7 +73,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 64px;
+    margin: 32px auto;
   }
 
   .dataContainer {
