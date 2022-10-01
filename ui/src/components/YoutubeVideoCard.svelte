@@ -2,13 +2,14 @@
   import {onMount} from "svelte";
   import WavePortalContract from "../lib/WavePortal.contract";
 
-  export let url;
-  let contract, numberOfWaves;
+  export let url = "";
+  let contract, link;
+  let numberOfWaves = 0;
   let isLoading = false;
 
   onMount(async () => {
     contract = await WavePortalContract();
-    const link = await contract.getLink(url);
+    link = await contract.getLink(url);
     numberOfWaves = link.waveCount.toNumber();
   });
 
@@ -23,10 +24,13 @@
     const waveTxn = await contract.waveLink(url);
     isLoading = true;
     await waveTxn.wait();
-    const link = await contract.getLink(url);
-    numberOfWaves = link.waveCount.toNumber();
     isLoading = false;
+
+    link = await contract.getLink(url);
+    numberOfWaves = link.waveCount.toNumber();
   };
+
+  window.addEventListener("resetWaves", () => numberOfWaves = 0);
 </script>
 
 <div class="yt-video-card">

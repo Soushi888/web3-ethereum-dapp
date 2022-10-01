@@ -8,7 +8,7 @@ import type {WavePortal} from "../../../typechain-types";
 async function WavePortalContract(): Promise<WavePortal> {
 	// @ts-ignore
 	const {ethereum} = window;
-	const contractAddress = versions.latest;
+	const contractAddress = versions.current;
 	const contractABI = abi.abi;
 
 	const provider = new ethers.providers.Web3Provider(ethereum);

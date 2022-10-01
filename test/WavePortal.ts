@@ -1,25 +1,25 @@
-import {expect} from "chai";
+import { expect } from "chai";
+
+const { ethers } = require('hardhat');
+
+async function setup() {
+	const waveContractFactory = await ethers.getContractFactory("WavePortal");
+	const waveContract = await waveContractFactory.deploy();
+	const [owner, randomPerson] = await ethers.getSigners();
+
+	await waveContract.deployed();
+	return { waveContract, owner, randomPerson };
+}
 
 describe('WavePortal', () => {
-	const {ethers} = require('hardhat');
-
-	async function setup() {
-		const waveContractFactory = await ethers.getContractFactory("WavePortal");
-		const waveContract = await waveContractFactory.deploy();
-		const [owner, randomPerson] = await ethers.getSigners();
-
-		await waveContract.deployed();
-		return {waveContract, owner, randomPerson};
-	}
-
 	it('should total waves be 0', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 		let wavesNumber = (await waveContract.getTotalWaves()).toNumber();
 		expect(wavesNumber).to.equal(0);
 	});
 
 	it('should total waves be 1', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 		let waveTxn = await waveContract.wave();
 		await waveTxn.wait();
 
@@ -28,7 +28,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should total waves be 2', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 		let waveTxn = await waveContract.wave();
 		await waveTxn.wait();
 
@@ -40,7 +40,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should random peer wave', async () => {
-		const {waveContract, randomPerson, owner} = await setup();
+		const { waveContract, randomPerson, owner } = await setup();
 
 		let randomPeerTxn = await waveContract.connect(randomPerson).wave();
 		await randomPeerTxn.wait();
@@ -54,7 +54,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should reset waves', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 
 		let waveTxn = await waveContract.wave();
 		await waveTxn.wait();
@@ -70,7 +70,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should not wave if link not previously added', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 
 		let waveTxn = await waveContract.waveLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 		await waveTxn.wait();
@@ -83,7 +83,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should add a link', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 
 		let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 		await linkTxn.wait();
@@ -95,7 +95,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should not add link if already present', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 
 		let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 		await linkTxn.wait();
@@ -108,7 +108,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should get a link', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 
 		let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 		await linkTxn.wait();
@@ -127,7 +127,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should wave a link', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 
 		let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 		await linkTxn.wait();
@@ -143,7 +143,7 @@ describe('WavePortal', () => {
 	});
 
 	it('should wave a link twice', async () => {
-		const {waveContract} = await setup();
+		const { waveContract } = await setup();
 
 		let linkTxn = await waveContract.addLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 		await linkTxn.wait();

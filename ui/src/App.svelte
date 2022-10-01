@@ -5,7 +5,7 @@
   import CountWaveButton from "./components/buttons/CountWaveButton.svelte";
   import versions from "./utils/versions.json";
   import AddLinkButton from "./components/buttons/AddLinkButton.svelte";
-
+  import ResetButton from "./components/buttons/ResetButton.svelte";
 
   const {ethereum} = window;
   let status: string, isLogged: boolean, account: string;
@@ -27,7 +27,7 @@
     }
   };
 
-  const etherScanLink = `https://goerli.etherscan.io/address/${versions.latest}`;
+  const etherScanLink = `https://goerli.etherscan.io/address/${versions.current}`;
 
   const handleConnected = (event) => {
     account = event.detail.account;
@@ -46,13 +46,11 @@
       <div class="header">
         👋 Hey there!
         <p class={isLogged ? "success" : "fail"}>{status}</p>
-        <p>Contract : <a href={etherScanLink} target="_blank">{versions.v2}</a></p>
+        <p>Contract : <a href={etherScanLink} target="_blank">{versions.current}</a></p>
       </div>
 
       {#if (ethereum && !isLogged)}
-        <div class="btn">
           <ConnectWalletButton on:connected={handleConnected}/>
-        </div>
       {/if}
 
       {#if (isLogged)}
@@ -60,6 +58,7 @@
           <WaveButtons/>
           <CountWaveButton/>
           <AddLinkButton/>
+          <ResetButton/>
         </div>
         <div class="videos">
           <VideosGrid/>
